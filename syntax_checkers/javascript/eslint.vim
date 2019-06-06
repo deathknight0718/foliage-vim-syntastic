@@ -68,14 +68,14 @@ function! SyntaxCheckers_javascript_eslint_GetLocList() dict
     return loclist
 endfunction
 
-function! SyntaxCheckers_javascript_eslint_GetNpmExec()
-    let npm_bin = ''
+function! SyntaxCheckers_javascript_eslint_GetYarnExec()
+    let yarn_bin = ''
     let eslint = 'eslint'
-    if executable('npm')
-        let npm_bin = split(system('npm bin'), '\n')[0]
+    if executable('yarn')
+        let yarn_bin = split(system('yarn bin'), '\n')[0]
     endif
-    if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
-        let eslint = npm_bin . '/eslint'
+    if strlen(yarn_bin) && executable(yarn_bin . '/eslint')
+        let eslint = yarn_bin . '/eslint'
     endif
     return eslint
 endfunction
