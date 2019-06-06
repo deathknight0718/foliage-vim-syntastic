@@ -70,7 +70,8 @@ endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'javascript',
-    \ 'name': 'eslint'})
+    \ 'name': 'eslint',
+    \ 'exec': split(system('npm bin', '\n')[0] . '/eslint') })
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
