@@ -68,10 +68,22 @@ function! SyntaxCheckers_javascript_eslint_GetLocList() dict
     return loclist
 endfunction
 
+function! SyntaxCheckers_javascript_eslint_GetNpmExec()
+    let npm_bin = ''
+    let eslint = 'eslint'
+    if executable('npm')
+        let npm_bin = split(system('npm bin'), '\n')[0]
+    endif
+    if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
+        let eslint = npm_bin . '/eslint'
+    endif
+    return eslint
+endfunction
+
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'javascript',
     \ 'name': 'eslint',
-    \ 'exec': split(system('npm bin', '\n')[0] . '/eslint') })
+    \ 'exec': SyntaxCheckers_javascript_eslint_GetNpmExec() })
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
