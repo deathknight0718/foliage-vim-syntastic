@@ -83,7 +83,7 @@ endfunction
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'javascript',
     \ 'name': 'eslint',
-    \ 'exec': SyntaxCheckers_javascript_eslint_GetNpmExec() })
+    \ 'exec': SyntaxCheckers_javascript_eslint_GetYarnExec() })
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
