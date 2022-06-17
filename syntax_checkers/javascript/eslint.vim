@@ -80,10 +80,22 @@ function! SyntaxCheckers_javascript_eslint_GetYarnExec()
     return eslint
 endfunction
 
+function! SyntaxCheckers_javascript_eslint_GetNpmExec()
+    let yarn_bin = ''
+    let eslint = 'eslint'
+    if executable('npm')
+        let npm_bin = split(system('npm bin'), '\n')[0]
+    endif
+    if strlen(npm_bin) && executable(npm_bin . '/eslint')
+        let eslint = npm_bin . '/eslint'
+    endif
+    return eslint
+endfunction
+
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'javascript',
     \ 'name': 'eslint',
-    \ 'exec': SyntaxCheckers_javascript_eslint_GetYarnExec() })
+    \ 'exec': SyntaxCheckers_javascript_eslint_GetNpmExec() })
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
